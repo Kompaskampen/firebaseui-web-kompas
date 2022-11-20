@@ -133,6 +133,22 @@
 {/template}
 
 
+/** Error message for missing password. */
+{template .errorPasswordOutOfBounds kind="text"}
+  {msg desc="Error message when the user used too exotic characters for the password."}
+    {literal}Password can only exist of letters, numbers and the following characters: .,?!@#$%^&*-=_+~±§()[]{}<>\|/;:'"{/literal}
+  {/msg}
+{/template}
+
+
+/** Error message for missing password. */
+{template .errorPasswordWeak kind="text"}
+  {msg desc="Error message when the user password isn't strong enough."}
+    {literal}Password must contain at least one capital letter, one small letter, one number, and one of the following characters: .,?!@#$%^&*-=_+~±§()[]{}<>\|/;:'"{/literal}
+  {/msg}
+{/template}
+
+
 /** Error message for incorrect confirm password. */
 {template .errorUnconfirmPassword kind="text"}
   {msg desc="Error message when the user didn't enter the same password as confirmation."}
