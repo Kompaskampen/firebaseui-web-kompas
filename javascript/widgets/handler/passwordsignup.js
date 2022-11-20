@@ -87,18 +87,14 @@ firebaseui.auth.widget.handler.onSignUpSubmit_ = function (app, component) {
 
   // Check fields are valid.
   var email = component.checkAndGetEmail();
-
-  var name = null;
-  if (requireDisplayName) {
-    name = component.checkAndGetName();
-  }
-
-  var password = component.checkAndGetNewPassword();
   if (!email) {
     component.getEmailElement().focus();
     return;
   }
+
+  var name = null;
   if (requireDisplayName) {
+    name = component.checkAndGetName();
     if (name) {
       name = goog.string.htmlEscape(name);
     } else {
@@ -106,8 +102,16 @@ firebaseui.auth.widget.handler.onSignUpSubmit_ = function (app, component) {
       return;
     }
   }
+
+  var password = component.checkAndGetNewPassword();
   if (!password) {
     component.getNewPasswordElement().focus();
+    return;
+  }
+
+  var confirmPass = component.checkAndGetConfirmPassword(password);
+  if (!confirmPass) {
+    component.getConfirmPasswordElement().focus();
     return;
   }
   // Initialize an internal temporary password credential. This will be used

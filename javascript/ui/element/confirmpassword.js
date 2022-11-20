@@ -96,19 +96,28 @@ goog.scope(function () {
    * Validates the password field and shows/clears the error message if necessary.
    * @param {Element} confirmPasswordElement The confirm password input.
    * @param {Element} errorElement The error panel.
+   * @param {string} password The password to validate against.
    * @return {boolean} True if fields are valid.
    * @private
    */
   element.confirmPassword.validate_ = function (
     confirmPasswordElement,
-    errorElement
+    errorElement,
+    password
   ) {
-    var password = element.getInputValue(confirmPasswordElement) || "";
-    if (!password) {
+    var confirmPassword = element.getInputValue(confirmPasswordElement) || "";
+    if (!confirmPassword) {
       element.setValid(confirmPasswordElement, false);
       element.show(
         errorElement,
         firebaseui.auth.soy2.strings.errorMissingPassword().toString()
+      );
+      return false;
+    } else if (confirmPassword !== password) {
+      element.setValid(confirmPasswordElement, false);
+      element.show(
+        errorElement,
+        firebaseui.auth.soy2.strings.errorUnconfirmPassword().toString()
       );
       return false;
     } else {
@@ -168,13 +177,17 @@ goog.scope(function () {
    * @return {?string} The confirm password.
    * @this {goog.ui.Component}
    */
-  element.confirmPassword.checkAndGetConfirmPassword = function () {
+  element.confirmPassword.checkAndGetConfirmPassword = function (password) {
     var confirmPasswordElement =
       element.confirmPassword.getConfirmPasswordElement.call(this);
     var errorElement =
       element.confirmPassword.getConfirmPasswordErrorElement.call(this);
     if (
-      element.confirmPassword.validate_(confirmPasswordElement, errorElement)
+      element.confirmPassword.validate_(
+        confirmPasswordElement,
+        errorElement,
+        password
+      )
     ) {
       return element.getInputValue(confirmPasswordElement);
     }

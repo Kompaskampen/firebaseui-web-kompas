@@ -133,6 +133,14 @@
 {/template}
 
 
+/** Error message for incorrect confirm password. */
+{template .errorUnconfirmPassword kind="text"}
+  {msg desc="Error message when the user didn't enter the same password as confirmation."}
+    Passwords don't match
+  {/msg}
+{/template}
+
+
 /** Error message for too many account creation. */
 {template .errorTooManyRequestsCreateAccount kind="text"}
   {msg desc="Error message when too many accounts have been created from the same IP address."}
