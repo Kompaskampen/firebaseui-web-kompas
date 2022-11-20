@@ -518,7 +518,7 @@ input.firebaseui-input-invalid{
   height: 120px;
 }
 
-.firebaseui-new-password-component {
+.firebaseui-new-password-component, .firebaseui-confirm-password-component {
   display: inline-block;
   position: relative;
   width: 100%;
